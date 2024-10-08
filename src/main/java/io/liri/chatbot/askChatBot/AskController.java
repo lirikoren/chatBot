@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import static org.springframework.cglib.core.ReflectUtils.getClass;
 
 @RequestMapping("chatbotask")
 @RestController
 public class AskController {
 
-    Logger logger = LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(AskController.class);
 
     @PostMapping("/ask")
     ResponseEntity<ChatBotResponse> askChatBot(@RequestBody ChatBotRequest chatBotRequest) {
