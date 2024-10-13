@@ -1,4 +1,4 @@
-package io.liri.chatbot.askChatBot.modal;
+package io.liri.chatbot.openAiChatBot.modal;
 
 import java.util.Objects;
 
@@ -42,4 +42,5 @@ public class ChatBotResponse {
     public int hashCode() {
         return Objects.hash(question, answer);
     }
+
 }
