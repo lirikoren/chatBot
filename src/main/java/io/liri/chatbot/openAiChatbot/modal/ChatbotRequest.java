@@ -1,16 +1,16 @@
-package io.liri.chatbot.openAiChatBot.modal;
+package io.liri.chatbot.openAiChatbot.modal;
 
 import java.util.Objects;
 
-public class ChatBotRequest {
+public class ChatbotRequest {
 
     private String request;
 
-    public ChatBotRequest(String request) {
+    public ChatbotRequest(String request) {
         this.request = request;
     }
 
-    public ChatBotRequest() {
+    public ChatbotRequest() {
     }
 
     public String getRequest() {
@@ -21,7 +21,7 @@ public class ChatBotRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ChatBotRequest that = (ChatBotRequest) o;
+        ChatbotRequest that = (ChatbotRequest) o;
         return Objects.equals(request, that.request);
     }
 

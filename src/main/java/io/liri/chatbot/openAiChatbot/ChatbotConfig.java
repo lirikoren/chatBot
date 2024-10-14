@@ -1,10 +1,10 @@
-package io.liri.chatbot.openAiChatBot;
+package io.liri.chatbot.openAiChatbot;
 
 import org.springframework.context.annotation.Configuration;
 
 // http client - provided by spring boot
 @Configuration
-public class ChatBotConfig {
+public class ChatbotConfig {
 
 
 }

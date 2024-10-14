@@ -1,6 +1,6 @@
-package io.liri.chatbot.openAiChatBot;
+package io.liri.chatbot.openAiChatbot;
 
-import io.liri.chatbot.openAiChatBot.modal.ChatBotRequest;
+import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 // the service main role is to communicate with chatgpt API to send user question and receive responses.
 
 @Service
-public class ChatBotClientService {
+public class ChatbotClientService {
 
     private final ChatClient.Builder chatClientBuilder;
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -19,7 +19,7 @@ public class ChatBotClientService {
     /**
      * @noinspection SpringJavaInjectionPointsAutowiringInspection
      */
-    public ChatBotClientService(ChatClient.Builder chatClientBuilder) {
+    public ChatbotClientService(ChatClient.Builder chatClientBuilder) {
         this.chatClientBuilder = chatClientBuilder;
     }
 
@@ -28,10 +28,10 @@ public class ChatBotClientService {
         this.chatClient = chatClientBuilder.build();
     }
 
-    public String ask(ChatBotRequest chatBotRequest) {
+    public String ask(ChatbotRequest chatbotRequest) {
         return chatClient
                 .prompt()
-                .user(chatBotRequest.getRequest())
+                .user(chatbotRequest.getRequest())
                 .call()
                 .content();
     }

@@ -1,17 +1,17 @@
-package io.liri.chatbot.openAiChatBot.modal;
+package io.liri.chatbot.openAiChatbot.modal;
 
 import java.util.Objects;
 
-public class ChatBotResponse {
+public class ChatbotResponse {
     private String question;
     private String answer;
 
-    public ChatBotResponse(String question, String answer) {
+    public ChatbotResponse(String question, String answer) {
         this.question = question;
         this.answer = answer;
     }
 
-    public ChatBotResponse() {
+    public ChatbotResponse() {
     }
 
     public String getQuestion() {
@@ -24,7 +24,7 @@ public class ChatBotResponse {
 
     @Override
     public String toString() {
-        return "ChatBotResponse{" +
+        return "ChatbotResponse{" +
                 "question='" + question + '\'' +
                 ", answer='" + answer + '\'' +
                 '}';
@@ -34,7 +34,7 @@ public class ChatBotResponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ChatBotResponse that = (ChatBotResponse) o;
+        ChatbotResponse that = (ChatbotResponse) o;
         return Objects.equals(question, that.question) && Objects.equals(answer, that.answer);
     }
 
