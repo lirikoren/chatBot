@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("chatbotask")
 @RestController
 public class ChatbotController {
-    Logger logger = LoggerFactory.getLogger(ChatbotController.class);
     private final ChatbotResponseService chatBotResponseService;
+    Logger logger = LoggerFactory.getLogger(ChatbotController.class);
 
     public ChatbotController(ChatbotResponseService chatBotResponseService) {
         this.chatBotResponseService = chatBotResponseService;
