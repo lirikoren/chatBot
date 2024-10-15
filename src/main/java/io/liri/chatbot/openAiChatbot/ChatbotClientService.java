@@ -2,8 +2,6 @@ package io.liri.chatbot.openAiChatbot;
 
 import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
 import jakarta.annotation.PostConstruct;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 public class ChatbotClientService {
 
     private final ChatClient.Builder chatClientBuilder;
-    Logger logger = LoggerFactory.getLogger(getClass());
     private ChatClient chatClient;
 
     /**
