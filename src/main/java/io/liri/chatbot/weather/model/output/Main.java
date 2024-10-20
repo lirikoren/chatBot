@@ -1,4 +1,4 @@
-package io.liri.chatbot.weather.model;
+package io.liri.chatbot.weather.model.output;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

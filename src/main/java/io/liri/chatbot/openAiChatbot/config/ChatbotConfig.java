@@ -1,4 +1,4 @@
-package io.liri.chatbot.openAiChatbot;
+package io.liri.chatbot.openAiChatbot.config;
 
 import org.springframework.context.annotation.Configuration;
 

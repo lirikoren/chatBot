@@ -1,6 +1,6 @@
-package io.liri.chatbot.config.properties;
+package io.liri.chatbot.weather.properties;
 
-import io.liri.chatbot.weather.model.Location;
+import io.liri.chatbot.weather.model.input.Location;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Set;
@@ -8,5 +8,6 @@ import java.util.Set;
 @ConfigurationProperties("chatbot.geo")
 public record LocationsConfig(
         Set<Location> locations,
-        String url) {
+        String url,
+        String apiKey) {
 }

@@ -1,8 +1,8 @@
 package io.liri.chatbot.weather;
 
-import io.liri.chatbot.config.properties.LocationsConfig;
-import io.liri.chatbot.weather.model.Location;
-import io.liri.chatbot.weather.model.WeatherData;
+import io.liri.chatbot.weather.properties.LocationsConfig;
+import io.liri.chatbot.weather.model.input.Location;
+import io.liri.chatbot.weather.model.output.WeatherData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +23,6 @@ public class WeatherFetcherService {
     private static final String LON = "lon";
     private static final String LAT = "lat";
     private static final String APPID = "appid";
-    private static final String API_KEY = "";
     private final RestClient restClient;
     private final LocationsConfig locationsConfig;
     Logger logger = LoggerFactory.getLogger(WeatherFetcherService.class);
@@ -45,7 +44,7 @@ public class WeatherFetcherService {
     private WeatherData getWeatherDataForLocation(Location location) {
         return restClient
                 .get()
-                .uri(locationsConfig.url() + "?lat={lat}&lon={lon}&appid={appid}&units={units}", Map.of(LAT, location.lat(), LON, location.lng(), APPID, API_KEY, UNITS, METRIC))
+                .uri(locationsConfig.url() + "?lat={lat}&lon={lon}&appid={appid}&units={units}", Map.of(LAT, location.lat(), LON, location.lng(), APPID, locationsConfig.apiKey(), UNITS, METRIC))
                 .retrieve()
                 .body(WeatherData.class);
     }

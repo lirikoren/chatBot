@@ -21,7 +21,7 @@ class ChatbotResponseServiceTest {
     private static ChatbotRequest chatbotRequest;
     private static ChatbotResponse chatbotResponse;
     @Mock
-    ChatbotClientService chatbotClientService;
+    ChatbotAskService askChatbotService;
 
     @InjectMocks
     ChatbotResponseService chatbotResponseService;
@@ -35,7 +35,7 @@ class ChatbotResponseServiceTest {
     @Test
     void createChatbotResponse() {
 
-        doReturn(ANSWER).when(chatbotClientService).ask(eq(chatbotRequest));
+        doReturn(ANSWER).when(askChatbotService).ask(eq(chatbotRequest));
 
         ChatbotResponse response = chatbotResponseService.createChatbotResponse(chatbotRequest);
 

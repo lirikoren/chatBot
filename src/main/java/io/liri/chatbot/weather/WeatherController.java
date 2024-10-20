@@ -1,6 +1,6 @@
 package io.liri.chatbot.weather;
 
-import io.liri.chatbot.weather.model.WeatherData;
+import io.liri.chatbot.weather.model.output.WeatherData;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

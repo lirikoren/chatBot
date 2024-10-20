@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChatbotResponseService {
 
-    private final ChatbotClientService chatbotClientService;
+    private final ChatbotAskService askChatbotService;
 
-    public ChatbotResponseService(ChatbotClientService chatBotClientService) {
-        this.chatbotClientService = chatBotClientService;
+    public ChatbotResponseService(ChatbotAskService chatBotServiceAsk) {
+        this.askChatbotService = chatBotServiceAsk;
     }
 
     public ChatbotResponse createChatbotResponse(ChatbotRequest chatBotRequest) {
         return new ChatbotResponse(chatBotRequest.getRequest(),
-                chatbotClientService.ask(chatBotRequest));
+                askChatbotService.ask(chatBotRequest));
     }
 }

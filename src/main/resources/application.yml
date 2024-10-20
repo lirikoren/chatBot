@@ -11,6 +11,7 @@ spring:
 chatbot:
   geo:
     url: https://api.openweathermap.org/data/2.5/weather
+    api_key: ${Weather_API}
     locations:
       - lat: 29.5581
         lng: 34.9482
@@ -21,3 +22,7 @@ chatbot:
       - lat: 33.2783
         lng: 35.5796
         name: Metula
+
+app:
+  schedule:
+    reload-interval: 60000
