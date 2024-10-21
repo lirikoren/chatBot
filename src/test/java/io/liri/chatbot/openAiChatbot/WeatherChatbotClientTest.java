@@ -9,8 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ai.chat.client.ChatClient;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.doReturn;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
@@ -24,24 +23,27 @@ public class WeatherChatbotClientTest {
     @Mock
     private ChatResourceConfig chatResourceConfig;
     @Mock
-    private ChatClientDataLoader chatClientDataLoader;
-    @Mock
     private ChatClient chatClient;
 
     @InjectMocks
     private WeatherChatbotClient weatherChatbotClient;
+
     @BeforeEach
     public void setUp() {
+        weatherChatbotClient = new WeatherChatbotClient(chatClientBuilder, chatResourceConfig);
+    }
+
+    @Test
+    public void initAndGet() {
+        weatherChatbotClient.init();
+        assertEquals(chatClient, weatherChatbotClient.getChatClient());
 
     }
+
     @Test
-    public void getChatClient() {
-        var chatClient = mock(ChatClient.class);
-        var chatClientRequestSpec = mock(ChatClient.ChatClientRequestSpec.class);
-        var callResponseSpec = mock(ChatClient.CallResponseSpec.class);
-        doReturn(chatClientRequestSpec).when(chatClient).prompt();
-        doReturn(chatClientRequestSpec).when(chatClientRequestSpec).user(anyString());
-        doReturn(callResponseSpec).when(chatClientRequestSpec).call();
-        doReturn(EXPECTED).when(callResponseSpec).content();
+    public void setAndGetChatClient() {
+        ChatClient newChatClient = mock(ChatClient.class);
+        weatherChatbotClient.setChatClient(newChatClient);
+        assertEquals(newChatClient, weatherChatbotClient.getChatClient());
     }
 }
