@@ -1,8 +1,8 @@
 package io.liri.chatbot.weather;
 
-import io.liri.chatbot.weather.properties.LocationsConfig;
 import io.liri.chatbot.weather.model.input.Location;
 import io.liri.chatbot.weather.model.output.WeatherData;
+import io.liri.chatbot.weather.properties.LocationsConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;

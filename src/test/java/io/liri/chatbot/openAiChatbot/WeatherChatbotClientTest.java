@@ -15,9 +15,6 @@ import static org.mockito.Mockito.mock;
 @ExtendWith(MockitoExtension.class)
 public class WeatherChatbotClientTest {
 
-
-    private static final String EXPECTED = "1234";
-
     @Mock
     private ChatClient.Builder chatClientBuilder;
     @Mock

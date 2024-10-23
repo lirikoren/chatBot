@@ -36,9 +36,7 @@ class ChatbotResponseServiceTest {
     void createChatbotResponse() {
 
         doReturn(ANSWER).when(askChatbotService).ask(eq(chatbotRequest));
-
         ChatbotResponse response = chatbotResponseService.createChatbotResponse(chatbotRequest);
-
         assertEquals(chatbotResponse, response);
     }
 }
