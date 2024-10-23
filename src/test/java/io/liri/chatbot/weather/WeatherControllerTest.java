@@ -38,8 +38,7 @@ class WeatherControllerTest {
 
         Set<WeatherData> weatherDataSet = Collections.singleton(weatherData);
         doReturn(weatherDataSet).when(weatherFetcherService).fetchWeatherData();
-        ResponseEntity<Set<WeatherData>> response = weatherController.getWeather();
-        assertEquals(ok(weatherDataSet), response);
+        assertEquals(ok(weatherDataSet), weatherController.getWeather());
     }
 
 
