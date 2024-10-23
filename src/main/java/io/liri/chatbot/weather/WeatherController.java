@@ -1,6 +1,8 @@
 package io.liri.chatbot.weather;
 
 import io.liri.chatbot.weather.model.output.WeatherData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import static org.springframework.http.ResponseEntity.ok;
 public class WeatherController {
 
     private final WeatherFetcherService weatherFetcherService;
+    Logger logger = LoggerFactory.getLogger(WeatherController.class);
+
 
     public WeatherController(WeatherFetcherService weatherFetcherService) {
         this.weatherFetcherService = weatherFetcherService;
@@ -22,6 +26,7 @@ public class WeatherController {
 
     @GetMapping
     public ResponseEntity<Set<WeatherData>> getWeather() {
+        logger.info("the weather is: {}", weatherFetcherService.fetchWeatherData());
         return ok(weatherFetcherService.fetchWeatherData());
     }
 }
