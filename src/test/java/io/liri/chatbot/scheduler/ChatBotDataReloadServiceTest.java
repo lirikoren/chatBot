@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.QuestionAnswerAdvisor;
+import org.springframework.ai.vectorstore.SimpleVectorStore;
 
 import static org.mockito.Mockito.*;
 
@@ -20,32 +21,27 @@ class ChatBotDataReloadServiceTest {
     WeatherChatbotClient weatherChatbotClient;
     @Mock
     ChatClientDataLoader chatClientDataLoader;
-    @Mock
-    ChatClient chatClient;
-
 
     @InjectMocks
     ChatBotDataReloadService chatBotDataReloadService;
 
+    ChatClient chatClient = mock(ChatClient.class);
+
     @BeforeEach
     void setUp() {
-        chatBotDataReloadService = new ChatBotDataReloadService(weatherChatbotClient, chatClientDataLoader);
+
+        var builder = mock(ChatClient.Builder.class);
+        var vectorStore = mock(SimpleVectorStore.class);
+        doReturn(vectorStore).when(chatClientDataLoader).loadWeatherVectorStore();
+        doReturn(chatClient).when(weatherChatbotClient).getChatClient();
+        doReturn(builder).when(chatClient).mutate();
+        doReturn(builder).when(builder).defaultAdvisors(any(QuestionAnswerAdvisor.class));
+        doReturn(chatClient).when(builder).build();
     }
 
     @Test
     void reloadChatClient() {
-        //not working
-
-        var vectorStore = chatClientDataLoader.loadWeatherVectorStore();
-        doReturn(chatClient)
-                .when(weatherChatbotClient)
-                .getChatClient()
-                .mutate()
-                .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore))
-                .build();
-        weatherChatbotClient.setChatClient(chatClient);
         chatBotDataReloadService.reloadChatClient();
-        verify(chatClientDataLoader).loadWeatherVectorStore();
-        verify(weatherChatbotClient).setChatClient(chatClient);
+        verify(weatherChatbotClient).setChatClient(eq(chatClient));
     }
 }

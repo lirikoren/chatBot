@@ -18,8 +18,6 @@ class ChatbotResponseServiceTest {
 
     private static final String ANSWER = "Answer";
     private static final String QUESTION = "Question";
-    private static ChatbotRequest chatbotRequest;
-    private static ChatbotResponse chatbotResponse;
     @Mock
     ChatbotAskService askChatbotService;
 
@@ -28,15 +26,15 @@ class ChatbotResponseServiceTest {
 
     @BeforeEach
     void setUp() {
-        chatbotRequest = new ChatbotRequest(QUESTION);
-        chatbotResponse = new ChatbotResponse(QUESTION, ANSWER);
+
     }
 
     @Test
     void createChatbotResponse() {
+        ChatbotRequest chatbotRequest = new ChatbotRequest(QUESTION);
+        ChatbotResponse chatbotResponse = new ChatbotResponse(QUESTION, ANSWER);
 
         doReturn(ANSWER).when(askChatbotService).ask(eq(chatbotRequest));
-        ChatbotResponse response = chatbotResponseService.createChatbotResponse(chatbotRequest);
-        assertEquals(chatbotResponse, response);
+        assertEquals(chatbotResponse, chatbotResponseService.createChatbotResponse(chatbotRequest));
     }
 }

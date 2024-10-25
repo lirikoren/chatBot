@@ -11,6 +11,7 @@ import java.util.Map;
 @Service
 public class ChatClientDataLoader {
 
+    static final String CITY = "City";
     private final SimpleVectorStore vectorStore;
     private final WeatherFetcherService weatherFetcherService;
 
@@ -27,7 +28,7 @@ public class ChatClientDataLoader {
     private List<Document> createDocumentList() {
         return weatherFetcherService.fetchWeatherData()
                 .stream()
-                .map(weatherData -> new Document(weatherData.name(), weatherData.toString(), null, Map.of("City", weatherData.name())))
+                .map(weatherData -> new Document(weatherData.name(), weatherData.toString(), null, Map.of(CITY, weatherData.name())))
                 .toList();
     }
 }
