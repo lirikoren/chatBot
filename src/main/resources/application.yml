@@ -25,4 +25,7 @@ chatbot:
 
 app:
   schedule:
-    reload-interval: 60000
+    reload-interval: 600000
+  jwt:
+    jwtSecret: mySecret123!
+    jwtExpirationMs: 60000000000000000

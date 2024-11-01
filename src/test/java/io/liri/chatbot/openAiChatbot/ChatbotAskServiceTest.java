@@ -1,6 +1,7 @@
 package io.liri.chatbot.openAiChatbot;
 
-import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +23,7 @@ class ChatbotAskServiceTest {
 
     public static final String QUESTION = "Q";
     private static final String EXPECTED = "1234";
+    private static final Gender GENDER = Gender.MALE;
     @Mock
     private WeatherChatbotClient weatherChatbotClient;
 
@@ -37,12 +39,12 @@ class ChatbotAskServiceTest {
         doReturn(chatClientRequestSpec).when(chatClientRequestSpec).user(eq(QUESTION));
         doReturn(callResponseSpec).when(chatClientRequestSpec).call();
         doReturn(EXPECTED).when(callResponseSpec).content();
-        doReturn(chatClient).when(weatherChatbotClient).getChatClient();
+        doReturn(chatClient).when(weatherChatbotClient).getChatClient(GENDER);
     }
 
     @Test
     void ask() {
         var chatbotRequest = new ChatbotRequest(QUESTION);
-        assertEquals(EXPECTED, askChatbotService.ask(chatbotRequest));
+        assertEquals(EXPECTED, askChatbotService.ask(chatbotRequest,GENDER));
     }
 }

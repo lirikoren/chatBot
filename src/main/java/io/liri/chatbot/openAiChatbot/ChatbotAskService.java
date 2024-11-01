@@ -1,6 +1,7 @@
 package io.liri.chatbot.openAiChatbot;
 
-import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,9 @@ public class ChatbotAskService {
     }
 
 
-    public String ask(ChatbotRequest chatbotRequest) {
+    public String ask(ChatbotRequest chatbotRequest, Gender gender) {
         logger.info("asked:{}", chatbotRequest.getRequest());
-        return weatherChatbotClient.getChatClient()
+        return weatherChatbotClient.getChatClient(gender)
                 .prompt()
                 .user(chatbotRequest.getRequest())
                 .call()

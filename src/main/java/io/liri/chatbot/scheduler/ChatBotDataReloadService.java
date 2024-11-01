@@ -2,6 +2,7 @@ package io.liri.chatbot.scheduler;
 
 import io.liri.chatbot.openAiChatbot.ChatClientDataLoader;
 import io.liri.chatbot.openAiChatbot.WeatherChatbotClient;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
@@ -10,6 +11,8 @@ import org.springframework.ai.vectorstore.SimpleVectorStore;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
 
 @Service
 public class ChatBotDataReloadService {
@@ -27,13 +30,15 @@ public class ChatBotDataReloadService {
     @Async
     public void reloadChatClient() {
         var vectorStore = chatClientDataLoader.loadWeatherVectorStore();
-        ChatClient chatClient = mutateWeatherData(vectorStore);
-        weatherChatbotClient.setChatClient(chatClient);
+        Arrays.stream(Gender.values()).forEach(gender -> {
+            ChatClient chatClient = mutateWeatherData(vectorStore, gender);
+            weatherChatbotClient.setChatClientMap(gender, chatClient);
+        });
         logger.info("the client has been reloaded");
     }
 
-    private ChatClient mutateWeatherData(SimpleVectorStore vectorStore) {
-        return weatherChatbotClient.getChatClient()
+    private ChatClient mutateWeatherData(SimpleVectorStore vectorStore, Gender gender) {
+        return weatherChatbotClient.getChatClient(gender)
                 .mutate()
                 .defaultAdvisors(new QuestionAnswerAdvisor(vectorStore))
                 .build();

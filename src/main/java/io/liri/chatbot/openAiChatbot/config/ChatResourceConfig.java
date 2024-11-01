@@ -7,11 +7,19 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class ChatResourceConfig {
 
-    @Value("classpath:/chatbot/system-prompt.txt")
-    private Resource chatbotPrompt;
+    @Value("classpath:/chatbot/male-system-prompt.txt")
+    private Resource maleChatbotPrompt;
 
 
-    public Resource getChatbotPrompt() {
-        return chatbotPrompt;
+    @Value("classpath:/chatbot/female-system-prompt.txt")
+    private Resource femaleChatbotPrompt;
+
+
+    public Resource getMaleChatbotPrompt() {
+        return maleChatbotPrompt;
+    }
+
+    public Resource getFemaleChatbotPrompt() {
+        return femaleChatbotPrompt;
     }
 }

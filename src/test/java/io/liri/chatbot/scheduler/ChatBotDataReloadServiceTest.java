@@ -2,6 +2,7 @@ package io.liri.chatbot.scheduler;
 
 import io.liri.chatbot.openAiChatbot.ChatClientDataLoader;
 import io.liri.chatbot.openAiChatbot.WeatherChatbotClient;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class ChatBotDataReloadServiceTest {
+
     @Mock
     WeatherChatbotClient weatherChatbotClient;
     @Mock
@@ -33,7 +35,8 @@ class ChatBotDataReloadServiceTest {
         var builder = mock(ChatClient.Builder.class);
         var vectorStore = mock(SimpleVectorStore.class);
         doReturn(vectorStore).when(chatClientDataLoader).loadWeatherVectorStore();
-        doReturn(chatClient).when(weatherChatbotClient).getChatClient();
+        doReturn(chatClient).when(weatherChatbotClient).getChatClient(eq(Gender.MALE));
+        doReturn(chatClient).when(weatherChatbotClient).getChatClient(eq(Gender.FEMALE));
         doReturn(builder).when(chatClient).mutate();
         doReturn(builder).when(builder).defaultAdvisors(any(QuestionAnswerAdvisor.class));
         doReturn(chatClient).when(builder).build();
@@ -42,6 +45,7 @@ class ChatBotDataReloadServiceTest {
     @Test
     void reloadChatClient() {
         chatBotDataReloadService.reloadChatClient();
-        verify(weatherChatbotClient).setChatClient(eq(chatClient));
+        verify(weatherChatbotClient).setChatClientMap(eq(Gender.MALE), eq(chatClient));
+        verify(weatherChatbotClient).setChatClientMap(eq(Gender.FEMALE), eq(chatClient));
     }
 }

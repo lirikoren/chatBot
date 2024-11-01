@@ -1,7 +1,8 @@
 package io.liri.chatbot.openAiChatbot;
 
-import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
-import io.liri.chatbot.openAiChatbot.modal.ChatbotResponse;
+import io.liri.chatbot.openAiChatbot.model.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.ChatbotResponse;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ class ChatbotControllerTest {
 
     private static final String ANSWER = "Answer";
     private static final String QUESTION = "Question";
+
     @Mock
     ChatbotResponseService chatbotResponseService;
 
@@ -30,15 +32,29 @@ class ChatbotControllerTest {
     }
 
     @Test
-    void askChatBot() {
+    void askMaleChatBot() {
         var chatbotRequest = new ChatbotRequest("1234");
         var chatbotResponse = new ChatbotResponse(QUESTION, ANSWER);
 
-        doReturn(chatbotResponse).when(chatbotResponseService).createChatbotResponse(eq(chatbotRequest));
+        doReturn(chatbotResponse).when(chatbotResponseService).createChatbotResponse(eq(chatbotRequest), eq(Gender.MALE));
 
-        ResponseEntity<ChatbotResponse> response = chatbotController.askChatbot(chatbotRequest);
+        ResponseEntity<ChatbotResponse> response = chatbotController.askMaleChatbot(chatbotRequest);
 
         assertEquals(ResponseEntity.ok(chatbotResponse), response);
 
     }
+
+    @Test
+    void askFemaleChatBot() {
+        var chatbotRequest = new ChatbotRequest("1234");
+        var chatbotResponse = new ChatbotResponse(QUESTION, ANSWER);
+
+        doReturn(chatbotResponse).when(chatbotResponseService).createChatbotResponse(eq(chatbotRequest), eq(Gender.FEMALE));
+
+        ResponseEntity<ChatbotResponse> response = chatbotController.askFemaleChatbot(chatbotRequest);
+
+        assertEquals(ResponseEntity.ok(chatbotResponse), response);
+
+    }
+
 }

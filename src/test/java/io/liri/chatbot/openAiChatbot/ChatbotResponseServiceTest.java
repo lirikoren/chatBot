@@ -1,7 +1,8 @@
 package io.liri.chatbot.openAiChatbot;
 
-import io.liri.chatbot.openAiChatbot.modal.ChatbotRequest;
-import io.liri.chatbot.openAiChatbot.modal.ChatbotResponse;
+import io.liri.chatbot.openAiChatbot.model.ChatbotRequest;
+import io.liri.chatbot.openAiChatbot.model.ChatbotResponse;
+import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,7 @@ class ChatbotResponseServiceTest {
 
     private static final String ANSWER = "Answer";
     private static final String QUESTION = "Question";
+    public static final Gender GENDER = Gender.MALE;
     @Mock
     ChatbotAskService askChatbotService;
 
@@ -34,7 +36,7 @@ class ChatbotResponseServiceTest {
         ChatbotRequest chatbotRequest = new ChatbotRequest(QUESTION);
         ChatbotResponse chatbotResponse = new ChatbotResponse(QUESTION, ANSWER);
 
-        doReturn(ANSWER).when(askChatbotService).ask(eq(chatbotRequest));
-        assertEquals(chatbotResponse, chatbotResponseService.createChatbotResponse(chatbotRequest));
+        doReturn(ANSWER).when(askChatbotService).ask(eq(chatbotRequest),eq(GENDER));
+        assertEquals(chatbotResponse, chatbotResponseService.createChatbotResponse(chatbotRequest, GENDER));
     }
 }

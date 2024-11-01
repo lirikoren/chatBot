@@ -1,4 +1,4 @@
-package io.liri.chatbot.openAiChatbot.modal;
+package io.liri.chatbot.openAiChatbot.model;
 
 import java.util.Objects;
 
