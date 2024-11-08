@@ -6,6 +6,7 @@ import io.liri.chatbot.openAiChatbot.model.Gender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,7 @@ public class ChatbotController {
         this.chatBotResponseService = chatBotResponseService;
     }
 
-
-
-    //    @PreAuthorize("hasRole('MALE')")
+    @PreAuthorize("hasRole('MALE')")
     @PostMapping("/askmale")
     ResponseEntity<ChatbotResponse> askMaleChatbot(@RequestBody ChatbotRequest chatBotRequest) {
         var chatbotResponse = chatBotResponseService.createChatbotResponse(chatBotRequest, Gender.MALE);
@@ -31,7 +30,7 @@ public class ChatbotController {
         return ResponseEntity.ok(chatbotResponse);
     }
 
-    //    @PreAuthorize("hasRole('FEMALE')")
+    @PreAuthorize("hasRole('FEMALE')")
     @PostMapping("/askfemale")
     ResponseEntity<ChatbotResponse> askFemaleChatbot(@RequestBody ChatbotRequest chatBotRequest) {
         var chatbotResponse = chatBotResponseService.createChatbotResponse(chatBotRequest, Gender.FEMALE);
