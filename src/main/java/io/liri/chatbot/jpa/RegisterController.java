@@ -1,4 +1,4 @@
-package io.liri.chatbot.security;
+package io.liri.chatbot.jpa;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,6 +8,14 @@ import org.springframework.stereotype.Controller;
 public class RegisterController {
     Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
-    // add the user to the database
+    private UserService userService;
+
+    public RegisterController(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void register() {
+
+    }
 
 }

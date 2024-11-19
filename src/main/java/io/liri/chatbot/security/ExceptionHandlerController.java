@@ -3,6 +3,7 @@ package io.liri.chatbot.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,16 +21,17 @@ public class ExceptionHandlerController {
 
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(value = BadCredentialsException.class)
-    public void badCredentialsException(BadCredentialsException exception, WebRequest request) {
+    public ResponseEntity<String> badCredentialsException(BadCredentialsException exception, WebRequest request) {
         logger.info("Unauthorized access attempt for request: {}, bad credentials: ", request.getParameterMap(), exception);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
+            MethodArgumentNotValidException exception) {
         Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
