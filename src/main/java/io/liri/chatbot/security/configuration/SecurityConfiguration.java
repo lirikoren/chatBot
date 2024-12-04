@@ -47,25 +47,11 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/login","/api/register/create").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtVerifier), AuthorizationFilter.class)
                 .httpBasic(Customizer.withDefaults())
-                .build();
-    }
-
-    @Bean
-    UserDetailsService userDetailsService() {
-        UserDetails roie = getUserDetails("Roie", Gender.MALE);
-        UserDetails liri = getUserDetails("Liri", Gender.FEMALE);
-        return new InMemoryUserDetailsManager(roie, liri);
-    }
-
-    private UserDetails getUserDetails(String name, Gender gender) {
-        return User.withUsername(name)
-                .password("{noop}123")
-                .roles(String.valueOf(gender))
                 .build();
     }
 

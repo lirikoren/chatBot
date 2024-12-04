@@ -27,7 +27,7 @@ public class ChatbotController {
     @PostMapping("/askmale")
     ResponseEntity<ChatbotResponse> askMaleChatbot(@RequestBody ChatbotRequest chatBotRequest) {
         var chatbotResponse = chatBotResponseService.createChatbotResponse(chatBotRequest, Gender.MALE);
-        logger.info("the result is: {}", chatbotResponse);
+        logger.info("the male result is: {}", chatbotResponse);
         return ResponseEntity.ok(chatbotResponse);
     }
 
@@ -35,7 +35,7 @@ public class ChatbotController {
     @PostMapping("/askfemale")
     ResponseEntity<ChatbotResponse> askFemaleChatbot(@RequestBody ChatbotRequest chatBotRequest) {
         var chatbotResponse = chatBotResponseService.createChatbotResponse(chatBotRequest, Gender.FEMALE);
-        logger.info("the result is: {}", chatbotResponse);
+        logger.info("the female result is: {}", chatbotResponse);
         return ResponseEntity.ok(chatbotResponse);
     }
 }

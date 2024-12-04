@@ -2,6 +2,7 @@ package io.liri.chatbot.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,7 +24,14 @@ public class ExceptionHandlerController {
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<String> badCredentialsException(BadCredentialsException exception, WebRequest request) {
         logger.info("Unauthorized access attempt for request: {}, bad credentials: ", request.getParameterMap(), exception);
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = DuplicateKeyException.class)
+    public ResponseEntity<String> duplicateKeyException(DuplicateKeyException exception, WebRequest request) {
+        logger.info("Unauthorized access attempt for request: {}, bad credentials: ", request.getParameterMap(), exception);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
