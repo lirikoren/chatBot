@@ -9,9 +9,11 @@ spring:
   data:
     mongodb:
       auto-index-creation: true
-#  data:
-#    mongodb:
-#      uri: mongodb://localhost:27017/local
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id:
+
 chatbot:
   geo:
     url: https://api.openweathermap.org/data/2.5/weather
